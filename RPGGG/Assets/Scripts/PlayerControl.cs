@@ -8,11 +8,13 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private LayerMask groundLayer;
     private CharacterController charController;
     private Vector3 targetPosition;
+    private Animator animator;
     
     void Start()
     {
         charController = GetComponent<CharacterController>();
         targetPosition = transform.position;
+        animator = GetComponent<Animator>();
     }
     
     void Update()
@@ -21,9 +23,14 @@ public class PlayerControl : MonoBehaviour
 
         if (distanceToTarget > 0.5f)
         {
+            animator.SetBool("isRunning", true);
             Vector3 direction = Vector3.Normalize(targetPosition - transform.position);
             charController.Move(direction * (moveSpeed * Time.deltaTime));
             transform.LookAt(targetPosition);
+        }
+        else
+        {
+            animator.SetBool("isRunning", false);
         }
         
         if (Input.GetMouseButtonDown(0))
