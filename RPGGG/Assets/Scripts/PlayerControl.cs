@@ -43,6 +43,13 @@ public class PlayerControl : MonoBehaviour
                 targetPosition = hit.point;
             }
         }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            animator.SetTrigger("Stab");
+        }
+        
+
         
     }
 }
