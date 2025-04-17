@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
 {
    [SerializeField] private Transform target;
    [SerializeField] private Collider weapon;
+   [SerializeField] private float attackTime;
    private NavMeshAgent meshAgent;
    private Animator animator;
    private bool enemyAlive = true;
