@@ -6,7 +6,7 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-   [SerializeField] private Transform target;
+   [SerializeField] public Transform target;
    [SerializeField] private Collider weapon;
    [SerializeField] private float attackInterval = 0.5f;
 
@@ -37,6 +37,7 @@ public class Enemy : MonoBehaviour
    {
       enemyAlive = false;
       meshAgent.isStopped = true;
+      weapon.enabled = false;
    }
 
    private void Update()
