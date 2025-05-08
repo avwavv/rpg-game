@@ -5,10 +5,12 @@ using UnityEngine;
 
 public class playerHealth : MonoBehaviour
 {
-    [SerializeField] private float startHealth;
+    [SerializeField] private int startHealth;
     [SerializeField] private float hitInterval = 0.5f;
+    [SerializeField] private float attackInterval = 0.5f;
 
-    private float currentHealth;
+    private int currentHealth;
+    private int currentMaxHealth;
     private float lastHitTime = 0f;
     private Animator animator;
 
@@ -18,8 +20,14 @@ public class playerHealth : MonoBehaviour
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        currentMaxHealth = startHealth;
         currentHealth = startHealth;
         isAlive = true;
+    }
+
+    public float GetHealthRatio()
+    {
+        return (float) currentHealth / (float) currentMaxHealth;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -30,7 +38,7 @@ public class playerHealth : MonoBehaviour
         }
     }
 
-    private void TakeDamage(float damage)
+    private void TakeDamage(int damage)
     {
         lastHitTime = Time.time; 
         currentHealth -= damage;
