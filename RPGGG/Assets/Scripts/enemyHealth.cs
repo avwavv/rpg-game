@@ -41,7 +41,6 @@ public class enemyHealth : MonoBehaviour
     {
         lastHitTime = Time.time; 
         currentHealth -= damage;
-        Debug.Log("Health: " + currentHealth);
         if (currentHealth > 0)
         {
             animator.SetTrigger("Hit");

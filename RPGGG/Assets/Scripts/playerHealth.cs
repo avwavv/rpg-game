@@ -7,7 +7,6 @@ public class playerHealth : MonoBehaviour
 {
     [SerializeField] private int startHealth;
     [SerializeField] private float hitInterval = 0.5f;
-    [SerializeField] private float attackInterval = 0.5f;
 
     private int currentHealth;
     private int currentMaxHealth;

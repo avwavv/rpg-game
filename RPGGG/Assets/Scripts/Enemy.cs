@@ -8,7 +8,10 @@ public class Enemy : MonoBehaviour
 {
    [SerializeField] private Transform target;
    [SerializeField] private Collider weapon;
-   [SerializeField] private float attackTime;
+   [SerializeField] private float attackInterval = 0.5f;
+
+   private float lastAttackTime;
+   
    private NavMeshAgent meshAgent;
    private Animator animator;
    private bool enemyAlive = true;
@@ -42,16 +45,21 @@ public class Enemy : MonoBehaviour
       {
          return;
       }
-      if (Vector3.Distance(transform.position, target.position) > 1f)
+      if (Vector3.Distance(transform.position, target.position) > 1.5f)
       {
          meshAgent.isStopped = false;
-         animator.SetBool("isRunning", true);
          meshAgent.SetDestination(target.position);
+         animator.SetBool("isRunning", true);
       }
       else
       {
          animator.SetBool("isRunning", false);
          meshAgent.isStopped = true;
+         if (Time.time - lastAttackTime > attackInterval)
+         {
+            lastAttackTime = Time.time;
+            animator.SetTrigger("Attack");
+         }
       }
    }
 }

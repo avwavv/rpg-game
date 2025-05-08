@@ -11,6 +11,6 @@ public class UIManager : MonoBehaviour
 
     private void Update()
     {
-        health.fillAmount = Mathf.Lerp(_playerHealth.GetHealthRatio(), health.fillAmount, 2 * Time.deltaTime);
+        health.fillAmount = Mathf.Lerp( health.fillAmount, _playerHealth.GetHealthRatio(), 2 * Time.deltaTime);
     }
 }
