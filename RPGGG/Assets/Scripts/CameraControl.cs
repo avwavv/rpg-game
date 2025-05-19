@@ -20,7 +20,6 @@ public class CameraControl : MonoBehaviour
         {
             return;
         }
-        
         Vector3 cameraTarget = offset + target.position;
         transform.position = Vector3.Lerp(transform.position, cameraTarget, smoothTime * Time.deltaTime);
     }
