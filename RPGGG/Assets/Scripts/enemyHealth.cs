@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -10,6 +8,7 @@ public class enemyHealth : MonoBehaviour
     [SerializeField] private float hitInterval = 0.5f;
     [SerializeField] private int xpToGive = 10;
     public UnityEvent OnDeath;
+    private SoundManager soundManager;
 
     private float currentHealth;
     private float lastHitTime = 0f;
@@ -24,6 +23,7 @@ public class enemyHealth : MonoBehaviour
 
     private void Start()
     {
+        soundManager = FindObjectOfType<SoundManager>();
         enemyAlive = true;
         animator = GetComponent<Animator>();
         currentHealth = startHealth;
@@ -44,10 +44,12 @@ public class enemyHealth : MonoBehaviour
         currentHealth -= damage;
         if (currentHealth > 0)
         {
+            soundManager.PlaySFX(soundManager.enemyScream);
             animator.SetTrigger("Hit");
         }
         else
         {
+            soundManager.PlaySFX(soundManager.enemyDeath);
            LevelManager.instance.GiveXP(xpToGive); 
             animator.SetTrigger("Death");
             OnDeath.Invoke();

@@ -1,6 +1,4 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class playerHealth : MonoBehaviour
@@ -8,6 +6,7 @@ public class playerHealth : MonoBehaviour
     [SerializeField] private int startHealth;
     [SerializeField] private float hitInterval = 0.5f;
     [SerializeField] private int healthGainedPerLevel = 20;
+    [SerializeField] private SoundManager soundManager;
 
     private int currentHealth;
     private int currentMaxHealth;
@@ -50,10 +49,13 @@ public class playerHealth : MonoBehaviour
         currentHealth -= damage;
         if (currentHealth > 0)
         {
+            soundManager.PlaySFX(soundManager.playerScream);
             animator.SetTrigger("Hit");
         }
         else
         {
+            soundManager.PlaySFX(soundManager.playerDeath);
+            GameEvents.CallGameEnd();
             isAlive = false;
             animator.SetTrigger("Death");
         }

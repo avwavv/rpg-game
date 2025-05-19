@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,6 +6,7 @@ public class Enemy : MonoBehaviour
    [SerializeField] public Transform target;
    [SerializeField] private Collider weapon;
    [SerializeField] private float attackInterval = 0.5f;
+   private SoundManager soundManager;
 
    private float lastAttackTime;
    
@@ -18,6 +16,7 @@ public class Enemy : MonoBehaviour
 
    private void Start()
    {
+      soundManager = FindObjectOfType<SoundManager>();
       weapon.enabled = false;
       animator = GetComponent<Animator>();
       meshAgent = GetComponent<NavMeshAgent>();
@@ -25,6 +24,7 @@ public class Enemy : MonoBehaviour
 
    public void StartAttack()
    {
+      soundManager.PlaySFX(soundManager.enemyAttack);
       weapon.enabled = true;
    }
 
@@ -35,6 +35,7 @@ public class Enemy : MonoBehaviour
 
    public void OnDeath()
    {
+      soundManager.PlaySFX(soundManager.enemyDeath);
       enemyAlive = false;
       meshAgent.isStopped = true;
       weapon.enabled = false;

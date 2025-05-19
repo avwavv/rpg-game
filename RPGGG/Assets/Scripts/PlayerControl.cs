@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
@@ -7,6 +6,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField] private float moveSpeed;
     [SerializeField] private LayerMask groundLayer;
     [SerializeField] private Collider[] weapons;
+    [SerializeField] private SoundManager soundManager;
     
     private CharacterController charController;
     private Vector3 targetPosition;
@@ -22,6 +22,7 @@ public class PlayerControl : MonoBehaviour
 
     public void BeginAttack()
     {
+        soundManager.PlaySFX(soundManager.playerAttack);
         ToggleWeapons(true);
     }
 
